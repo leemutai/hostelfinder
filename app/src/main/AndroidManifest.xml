@@ -13,6 +13,19 @@
         android:theme="@style/Theme.Hostel_Locator"
         tools:targetApi="31">
         <activity
+            android:name=".SignActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".StartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Splash_Screen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
