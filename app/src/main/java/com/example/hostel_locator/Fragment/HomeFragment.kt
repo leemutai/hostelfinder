@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
@@ -52,15 +53,17 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(),itemMessage,Toast.LENGTH_SHORT).show()
             }
         })
+        val hsetype = listOf("Apartment","Bedsitter","Studio","OneBedroom")
         val apartName = listOf("Wiku","Vinci","Beyas","Lato")
         val price = listOf("Ksh6000","Ksh5000","Ksh8000","Ksh10000")
         val rating = listOf("4.9","4.0","3.0","4.5")
         val location = listOf("Rongai","Pangani","Gataka","Rosters")
-        val hsetype = listOf("Apartment","Bedsitter","Studio","OneBedroom")
         val bed = listOf("3.0","1.0","1.0","1.0")
         val apartImages = listOf(R.drawable.hostel,R.drawable.hostel2,R.drawable.hostel,R.drawable.hostel2)
 
 
-        val adapter = Row1Adapter(apartName,price,apartImages,price,rating,location,hsetype,bed)
+        val adapter = Row1Adapter(apartName,price,rating,location,hsetype,bed,apartImages)
+        binding.PopularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.PopularRecyclerView.adapter = adapter
     }
 }

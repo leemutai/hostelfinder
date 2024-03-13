@@ -1,13 +1,20 @@
 package com.example.hostel_locator.adapter
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hostel_locator.databinding.FragmentHomeBinding
+import com.bumptech.glide.Glide
 import com.example.hostel_locator.databinding.Row1ItemBinding
 
-class Row1Adapter(private val items:List<String>,private val price:List<String>,private val rating:List<String>,private val location:List<String>,private val hsetype:List<String>,private val bed:List<String>,private val image:List<Int>): RecyclerView.Adapter<Row1Adapter.Row1ViewHolder>() {
+class Row1Adapter(
+    private val items: List<String>,
+    private val price: List<String>,
+    private val rating: List<String>,
+    private val location: List<String>,
+    private val hsetype: List<String>,
+    private val bed: List<String>,
+    private val image: List<Int>,
+): RecyclerView.Adapter<Row1Adapter.Row1ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Row1ViewHolder {
@@ -33,14 +40,26 @@ class Row1Adapter(private val items:List<String>,private val price:List<String>,
     }
     class Row1ViewHolder(private val binding: Row1ItemBinding) :RecyclerView.ViewHolder(binding.root){
         private val imagesView = binding.imageRectangleTwelve
-        fun bind(item: String,price: String, rating:String,location:String,hsetype: String,bed:String,images: Int) {
+        fun bind(
+            item: String,
+            price: String,
+            rating: String,
+            location:String,
+            hsetype: String,
+            bed:String,
+            images: Int
+        ) {
              binding.apartNamePopular.text = item
             binding.txtPrice.text = price
-            binding.txtRating.text = rating
+            binding.txtRating.text = rating.toString()
             binding.txtLocation.text = location
             binding.textHseType.text = hsetype
             binding.txtBedSize.text = bed
-            imagesView.setImageResource(images)
+
+            Glide.with(imagesView.context)
+                .load(images)
+                .into(imagesView)
+//            imagesView.setImageResource(images)
         }
 
     }

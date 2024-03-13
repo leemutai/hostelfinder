@@ -61,13 +61,13 @@
                     android:layout_weight="0.56"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="Rating" />
+                    android:text="4.9" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/textHseType"
-                style="@style/TextAppearance.AppCompat.Small"
+                style="@style/Widget.AppCompat.TextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="104dp"
@@ -146,7 +146,7 @@
                 android:layout_weight="0.18"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="Size" />
+                android:text="2252" />
 
             <ImageView
                 android:id="@+id/imageCar"
@@ -167,17 +167,17 @@
                 android:layout_weight="0.11"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="Bed" />
+                android:text="3.0" />
 
             <TextView
                 android:id="@+id/txtPrice"
+                style="@android:style/TextAppearance.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.52"
-                android:singleLine="true"
                 android:ellipsize="end"
-                android:text="ksh6000/month"
-                style="@android:style/TextAppearance.Medium" />
+                android:singleLine="true"
+                android:text="ksh6000" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
