@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewAllMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/viewAllListings" />
 
     <TextView
         android:id="@+id/textView21"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <TextView
-        android:id="@+id/viewAllMenu"
+        android:id="@+id/viewAllListings"
         android:layout_width="80dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
@@ -67,7 +67,7 @@
         android:elevation="5dp"
         android:fontFamily="@font/lato_bold"
         android:gravity="center"
-        android:text="View Menu"
+        android:text="View Lists"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />

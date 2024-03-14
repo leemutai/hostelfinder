@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.hostel_locator.ListingsBottomSheetFragment
 import com.example.hostel_locator.R
 import com.example.hostel_locator.adapter.Row1Adapter
 import com.example.hostel_locator.databinding.FragmentHomeBinding
@@ -27,6 +28,11 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container,false)
+
+        binding.viewAllListings.setOnClickListener {
+            val bottomSheetDialog = ListingsBottomSheetFragment()
+            bottomSheetDialog.show(parentFragmentManager,"Test")
+        }
         return  binding.root
 
 

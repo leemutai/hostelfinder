@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearRow1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/listingsImage"
+        android:layout_width="96dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/banner1" />
+
+    <LinearLayout
+        android:id="@+id/linearColumnsignal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="13dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearRowsignal1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linearRowsignal2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.35"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp">
+
+                <ImageView
+                    android:id="@+id/imageSignal"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rating"
+                    />
+
+                <TextView
+                    android:id="@+id/listingsRating"
+                    style="@android:style/TextAppearance.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.56"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="4.9" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/listingsHseType"
+                style="@style/Widget.AppCompat.TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="104dp"
+                android:layout_weight="0.65"
+                android:ellipsize="end"
+                android:paddingStart="6dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="1dp"
+                android:singleLine="true"
+                android:text="Type" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/listingsApartName"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Apartment Name" />
+
+        <LinearLayout
+            android:id="@+id/linearRowlinkedin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp">
+
+            <ImageView
+                android:id="@+id/imageLinkedinTwo"
+                android:layout_width="8dp"
+                android:layout_height="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/finder"
+                />
+
+            <TextView
+                android:id="@+id/listingsLocation"
+                style="@android:style/TextAppearance.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Location" />
+
+            <TextView
+                android:id="@+id/addToListings"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/addtocartshape"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:text="Add To Lists"
+                android:textColor="@color/white"
+                app:layout_constraintHorizontal_bias="0.603" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearRowtelevision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp">
+
+            <ImageView
+                android:id="@+id/imageTelevision"
+                android:layout_width="12dp"
+                android:layout_height="9dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/ic_menu_camera"
+                />
+
+            <TextView
+                android:id="@+id/listingsHseSize"
+                style="@android:style/TextAppearance.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.18"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="2252" />
+
+            <ImageView
+                android:id="@+id/imageCar"
+                android:layout_width="13dp"
+                android:layout_height="9dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="2dp"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/ic_menu_gallery"
+                />
+
+            <TextView
+                android:id="@+id/listingsBedSize"
+                style="@android:style/TextAppearance.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="3.0" />
+
+            <TextView
+                android:id="@+id/listingsPrice"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.52"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="ksh6000" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
