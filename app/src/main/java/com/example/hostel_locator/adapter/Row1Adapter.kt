@@ -51,7 +51,7 @@ class Row1Adapter(
         ) {
              binding.apartNamePopular.text = item
             binding.txtPrice.text = price
-            binding.txtRating.text = rating.toString()
+            binding.txtRating.text = rating
             binding.txtLocation.text = location
             binding.textHseType.text = hsetype
             binding.txtBedSize.text = bed

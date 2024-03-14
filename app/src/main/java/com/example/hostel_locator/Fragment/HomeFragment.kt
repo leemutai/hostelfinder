@@ -35,9 +35,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.banner1, ScaleTypes.FIT))
-        imageList.add(SlideModel(R.drawable.banner2, ScaleTypes.FIT))
-        imageList.add(SlideModel(R.drawable.banner3, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.hostel, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.hostel2, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.hostel, ScaleTypes.FIT))
 
         val imageSlider = binding.imageSlider
         imageSlider.setImageList(imageList)
@@ -53,11 +53,11 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(),itemMessage,Toast.LENGTH_SHORT).show()
             }
         })
-        val hsetype = listOf("Apartment","Bedsitter","Studio","OneBedroom")
         val apartName = listOf("Wiku","Vinci","Beyas","Lato")
         val price = listOf("Ksh6000","Ksh5000","Ksh8000","Ksh10000")
         val rating = listOf("4.9","4.0","3.0","4.5")
         val location = listOf("Rongai","Pangani","Gataka","Rosters")
+        val hsetype = listOf("Apartment","Bedsitter","Studio","OneBedroom")
         val bed = listOf("3.0","1.0","1.0","1.0")
         val apartImages = listOf(R.drawable.hostel,R.drawable.hostel2,R.drawable.hostel,R.drawable.hostel2)
 
