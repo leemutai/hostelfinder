@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "162735438306",
+    "firebase_url": "https://hostel-locator-a8551-default-rtdb.firebaseio.com",
+    "project_id": "hostel-locator-a8551",
+    "storage_bucket": "hostel-locator-a8551.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162735438306:android:d3a8e7a4425495a1e461bb",
+        "android_client_info": {
+          "package_name": "com.example.hostel_locator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162735438306-r6lntakegv4aposhdhbegdtc6p7t49vp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hostel_locator",
+            "certificate_hash": "017327ee8d075e4c3c0bb6ec483fe469eeea0882"
+          }
+        },
+        {
+          "client_id": "162735438306-hqq2ihg0c5r645p22bif60tpfo0s05ke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuBlxgThsEc8HDQunzqDuq-pbOXIWgA8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162735438306-hqq2ihg0c5r645p22bif60tpfo0s05ke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
