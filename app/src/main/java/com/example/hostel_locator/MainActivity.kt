@@ -18,5 +18,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setupWithNavController(navController)
+        binding.notificationButton.setOnClickListener {
+            val bottomSheetDialog = Notification_Bottom_Fragment()
+            bottomSheetDialog.show(supportFragmentManager,"Test")
+        }
     }
 }
