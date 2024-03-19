@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hostel_locator.BookingActivity
+import com.example.hostel_locator.CongratsBottomSheet
 import com.example.hostel_locator.R
 import com.example.hostel_locator.adapter.FavoriteAdapter
 import com.example.hostel_locator.databinding.FragmentFavoriteBinding
@@ -54,6 +55,8 @@ class FavoriteFragment : Fragment() {
             val intent = Intent(requireContext(),BookingActivity::class.java)
             startActivity(intent)
         }
+
+
         return binding.root
     }
 }
