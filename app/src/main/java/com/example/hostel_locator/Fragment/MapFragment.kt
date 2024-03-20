@@ -26,7 +26,8 @@ class MapFragment : Fragment() {
         R.drawable.hostel,
         R.drawable.hostel2,
         R.drawable.hostel,
-        R.drawable.hostel2
+        R.drawable.hostel2,
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +56,7 @@ class MapFragment : Fragment() {
             filteredListingLocation,
             filteredListingHseType,
             filteredListingBed,
-            filteredListingImage
+            filteredListingImage,
         )
         binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.listingsRecyclerView.adapter = adapter
@@ -84,6 +85,7 @@ class MapFragment : Fragment() {
         filteredListingHseType.addAll(originalListingHseType)
         filteredListingBed.addAll(originalListingBed)
         filteredListingImage.addAll(originalListingImage)
+
 
         adapter.notifyDataSetChanged()
     }
@@ -121,6 +123,7 @@ class MapFragment : Fragment() {
                 filteredListingHseType.add(originalListingHseType[index])
                 filteredListingBed.add(originalListingBed[index])
                 filteredListingImage.add(originalListingImage[index])
+
             }
         }
         adapter.notifyDataSetChanged()

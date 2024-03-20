@@ -1,5 +1,6 @@
 package com.example.hostel_locator.Fragment
 
+import Row1Adapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.hostel_locator.ListingsBottomSheetFragment
 import com.example.hostel_locator.R
-import com.example.hostel_locator.adapter.Row1Adapter
+//import com.example.hostel_locator.adapter.Row1Adapter
 import com.example.hostel_locator.databinding.FragmentHomeBinding
 
 
@@ -68,7 +69,7 @@ class HomeFragment : Fragment() {
         val apartImages = listOf(R.drawable.hostel,R.drawable.hostel2,R.drawable.hostel,R.drawable.hostel2)
 
 
-        val adapter = Row1Adapter(apartName,price,rating,location,hsetype,bed,apartImages)
+        val adapter = Row1Adapter(apartName,price,rating,location,hsetype,bed,apartImages,requireContext())
         binding.PopularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.PopularRecyclerView.adapter = adapter
     }

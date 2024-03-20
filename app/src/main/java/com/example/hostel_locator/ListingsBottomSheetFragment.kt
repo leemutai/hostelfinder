@@ -39,7 +39,9 @@ class ListingsBottomSheetFragment : BottomSheetDialogFragment() {
             R.drawable.hostel,
             R.drawable.hostel2,
             R.drawable.hostel,
-            R.drawable.hostel2
+            R.drawable.hostel2,
+
+
         )
         val adapter = ListingsAdapter(
             ArrayList(listingItemsName),
@@ -49,6 +51,10 @@ class ListingsBottomSheetFragment : BottomSheetDialogFragment() {
             ArrayList(listingHseType),
             ArrayList(listingBed),
             ArrayList(ListingImage),
+
+
+
+
         )
         binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.listingsRecyclerView.adapter = adapter
