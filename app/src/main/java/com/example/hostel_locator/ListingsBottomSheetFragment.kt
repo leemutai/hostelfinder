@@ -51,10 +51,7 @@ class ListingsBottomSheetFragment : BottomSheetDialogFragment() {
             ArrayList(listingHseType),
             ArrayList(listingBed),
             ArrayList(ListingImage),
-
-
-
-
+            requireContext()
         )
         binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.listingsRecyclerView.adapter = adapter

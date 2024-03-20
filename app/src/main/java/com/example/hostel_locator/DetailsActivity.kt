@@ -11,13 +11,13 @@ class DetailsActivity : AppCompatActivity() {
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val apartName = intent.getStringExtra("ItemsName")
+        val apartName = intent.getStringExtra("ListingsItemsName")
         val apartPrice = intent.getStringExtra("Price")
         val apartRating = intent.getStringExtra("Rating")
         val apartLocation = intent.getStringExtra("Location")
         val apartHsetype = intent.getStringExtra("Housetype")
         val apartBed = intent.getStringExtra("Bed")
-        val apartImage = intent.getIntExtra("Images",0)
+        val apartImage = intent.getIntExtra("ListingsImages",0)
 
         binding.detailsHouseName.text = apartName
         binding.detailsHseImage.setImageResource(apartImage)

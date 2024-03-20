@@ -57,6 +57,7 @@ class MapFragment : Fragment() {
             filteredListingHseType,
             filteredListingBed,
             filteredListingImage,
+            requireContext(),
         )
         binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.listingsRecyclerView.adapter = adapter

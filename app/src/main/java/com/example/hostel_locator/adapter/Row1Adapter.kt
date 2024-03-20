@@ -18,7 +18,6 @@ class Row1Adapter(
     private val image: List<Int>,
     private val requireContext: Context
 ) : RecyclerView.Adapter<Row1Adapter.Row1ViewHolder>() {
-private val itemClickListener: OnClickListener ?= null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Row1ViewHolder {
         return Row1ViewHolder(
             Row1ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -35,6 +34,20 @@ private val itemClickListener: OnClickListener ?= null
         val bed = bed[position]
 
         holder.bind(item, price, rating, location, hsetype, bed, images)
+
+        holder.itemView.setOnClickListener {
+            //setomclick to open details activity
+            val intent = Intent(requireContext, DetailsActivity::class.java)
+            intent.putExtra("ListingsItemsName", item)
+            intent.putExtra("ListingsPrice",price)
+            intent.putExtra("ListingsRating",rating)
+            intent.putExtra("ListingsLocation",  location)
+            intent.putExtra("ListingsHousetype", hsetype)
+            intent.putExtra("ListingsBed",  bed)
+            intent.putExtra("ListingsImages", images)
+            // Start the DetailsActivity when an item is clicked
+            requireContext.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -43,24 +56,7 @@ private val itemClickListener: OnClickListener ?= null
 
     inner class Row1ViewHolder(private val binding: Row1ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.root.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION){
-                    itemClickListener.onItemClick(position)
-                }
-                val intent = Intent(requireContext, DetailsActivity::class.java)
-                intent.putExtra("ItemsName", itemsName.get(position))
-                intent.putExtra("Price", price.get(position))
-                intent.putExtra("Rating", rating.get(position))
-                intent.putExtra("Location", location.get(position))
-                intent.putExtra("Housetype", hsetype.get(position))
-                intent.putExtra("Bed", bed.get(position))
-                intent.putExtra("Images", image.get(position))
-                // Start the DetailsActivity when an item is clicked
-                requireContext.startActivity(intent)
-            }
-        }
+
         private val imagesView = binding.imageRectangleTwelve
 
         fun bind(
@@ -89,7 +85,3 @@ private val itemClickListener: OnClickListener ?= null
     }
 }
 
-private fun OnClickListener?.onItemClick(position: Int) {
-
-
-}
