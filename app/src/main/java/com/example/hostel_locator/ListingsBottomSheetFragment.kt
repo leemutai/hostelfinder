@@ -1,17 +1,27 @@
 package com.example.hostel_locator
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hostel_locator.adapter.ListingsAdapter
 import com.example.hostel_locator.databinding.FragmentListingsBottomSheetBinding
+import com.example.hostel_locator.model.ListingProperty
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class ListingsBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding:FragmentListingsBottomSheetBinding
+
+    private lateinit var database : FirebaseDatabase
+    private lateinit var listingPropertys: MutableList<ListingProperty>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,34 +38,44 @@ class ListingsBottomSheetFragment : BottomSheetDialogFragment() {
         binding.buttonBack.setOnClickListener {
             dismiss()
         }
+        retrieveListingPropertys()
 
-        val listingItemsName = listOf("Dancy", "Qwety", "Kona", "Zipy")
-        val listingItemPrice = listOf("Ksh10000", "Ksh4500", "Ksh7500", "Ksh8000")
-        val listingRating = listOf("4.9", "3.5", "3.3", "2.0")
-        val listingLocation = listOf("Kahawa", "Langata", "Westy", "Imara")
-        val listingHseType = listOf("Apartment", "Studio", "2bd", "3bd")
-        val listingBed = listOf("3.0", "1.0", "2.0", "3.0")
-        val ListingImage = listOf(
-            R.drawable.hostel,
-            R.drawable.hostel2,
-            R.drawable.hostel,
-            R.drawable.hostel2,
-
-
-        )
-        val adapter = ListingsAdapter(
-            ArrayList(listingItemsName),
-            ArrayList(listingItemPrice),
-            ArrayList(listingRating),
-            ArrayList(listingLocation),
-            ArrayList(listingHseType),
-            ArrayList(listingBed),
-            ArrayList(ListingImage),
-            requireContext()
-        )
-        binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.listingsRecyclerView.adapter = adapter
         return binding.root
+    }
+
+    private fun retrieveListingPropertys() {
+        database = FirebaseDatabase.getInstance()
+        val listingRef = database.reference.child("listing")
+        listingPropertys = mutableListOf()
+
+        listingRef.addListenerForSingleValueEvent(object  :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (listingSnapshot in snapshot.children){
+                    val listingProperty = listingSnapshot.getValue(ListingProperty::class.java)
+                    listingProperty?.let { listingPropertys.add(it) }
+                }
+                Log.d("PROPERTYS","onDataChange:  Data Received")
+                //once data is received set to adapter
+                setAdapter()
+            }
+
+
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+    private fun setAdapter() {
+        if (listingPropertys.isNotEmpty()){
+            val adapter = ListingsAdapter(listingPropertys,requireContext())
+            binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.listingsRecyclerView.adapter = adapter
+            Log.d("PROPERTYS","setAdapter: data set  ")
+        }else{
+            Log.d("PROPERTYS","setAdapter: data Not  set  ")
+        }
+
     }
 
 }

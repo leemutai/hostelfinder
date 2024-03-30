@@ -49,16 +49,16 @@ class MapFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMapBinding.inflate(inflater, container, false)
 
-        adapter = ListingsAdapter(
-            filteredListingItemName,
-            filteredListingItemPrice,
-            filteredListingRating,
-            filteredListingLocation,
-            filteredListingHseType,
-            filteredListingBed,
-            filteredListingImage,
-            requireContext(),
-        )
+//        adapter = ListingsAdapter(
+//            filteredListingItemName,
+//            filteredListingItemPrice,
+//            filteredListingRating,
+//            filteredListingLocation,
+//            filteredListingHseType,
+//            filteredListingBed,
+//            filteredListingImage,
+//            requireContext(),
+//        )
         binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.listingsRecyclerView.adapter = adapter
 

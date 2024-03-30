@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/detailsDescription" />
 
     <TextView
-        android:id="@+id/detailsIngredients"
+        android:id="@+id/detailsFacilities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -110,13 +110,13 @@
         android:text="Listing Agent"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/detailsIngredients"
+        app:layout_constraintEnd_toEndOf="@+id/detailsFacilities"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/detailsIngredients"
-        app:layout_constraintTop_toBottomOf="@+id/detailsIngredients" />
+        app:layout_constraintStart_toStartOf="@+id/detailsFacilities"
+        app:layout_constraintTop_toBottomOf="@+id/detailsFacilities" />
 
     <TextView
-        android:id="@+id/detailsI"
+        android:id="@+id/detailsListingAgent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addItemButton"
+        android:id="@+id/addListingButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -141,5 +141,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsI" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsListingAgent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
