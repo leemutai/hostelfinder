@@ -3,9 +3,11 @@ package com.example.hostel_locator
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.hostel_locator.databinding.ActivityDetailsBinding
 import com.example.hostel_locator.model.FavListings
+import com.example.hostel_locator.model.ListingProperty
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -24,6 +26,8 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //initialize firebase auuth
+        auth = FirebaseAuth.getInstance()
 
         listingName = intent.getStringExtra("ListingPropertyName")
         listingPrice = intent.getStringExtra("ListingPropertyPrice")
@@ -65,7 +69,11 @@ class DetailsActivity : AppCompatActivity() {
         val favListing = FavListings(listingName.toString(),listingPrice.toString(),listingRating.toString(),listingLocation.toString(),listingHseType.toString(),listingBedsize.toString(),listingImage.toString())
 
         //save data to fav listing firebase data class
-        database.child("user").child(userId).child("ListingProperties").setValue("listingProperty")
+        database.child("user").child(userId).child("ListingProperties").push().setValue(favListing).addOnSuccessListener {
+            Toast.makeText(this,"Listings Added in Fav Succesfully",Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(this,"Listings NOT Added  ",Toast.LENGTH_SHORT).show()
+        }
 
     }
 }
