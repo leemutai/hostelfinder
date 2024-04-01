@@ -7,28 +7,29 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.hostel_locator.databinding.ActivityDetailsBinding
 import com.example.hostel_locator.model.FavListings
-import com.example.hostel_locator.model.ListingProperty
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class DetailsActivity : AppCompatActivity() {
-    private lateinit  var binding: ActivityDetailsBinding
-    private var listingName:String ? = null
-    private var listingPrice:String ? = null
-    private var listingRating:String ? = null
-    private var listingLocation:String ? = null
-    private var listingHseType:String ? = null
-    private var listingBedsize:String ? = null
-    private var listingImage:String ? = null
+    private lateinit var binding: ActivityDetailsBinding
+    private var listingName: String? = null
+    private var listingPrice: String? = null
+    private var listingRating: String? = null
+    private var listingLocation: String? = null
+    private var listingHseType: String? = null
+    private var listingBedsize: String? = null
+    private var listingImage: String? = null
     private var listingDescription: String? = null
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //initialize firebase auuth
+        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
+        // Get intent data
         listingName = intent.getStringExtra("ListingPropertyName")
         listingPrice = intent.getStringExtra("ListingPropertyPrice")
         listingRating = intent.getStringExtra("ListingPropertyRating")
@@ -36,44 +37,47 @@ class DetailsActivity : AppCompatActivity() {
         listingHseType = intent.getStringExtra("ListingPropertyHseType")
         listingBedsize = intent.getStringExtra("ListingPropertyBedsize")
         listingImage = intent.getStringExtra("ListingPropertyImage")
-        listingDescription = intent.getStringExtra("ListingDescription")
+//        listingDescription = intent.getStringExtra("ListingDescription")
 
-        with(binding){
+        // Set data to views
+        with(binding) {
             detailsHouseName.text = listingName
             detailsDescription.text = listingDescription
             Glide.with(this@DetailsActivity).load(Uri.parse(listingImage)).into(detailsHseImage)
         }
-//        val apartName = intent.getStringExtra("ListingPropertyName")
-//        val apartPrice = intent.getStringExtra("ListingPropertyPrice")
-//        val apartRating = intent.getStringExtra("ListingPropertyRating")
-//        val apartLocation = intent.getStringExtra("ListingPropertyLocation")
-//        val apartHsetype = intent.getStringExtra("ListingPropertyHseType")
-//        val apartBed = intent.getStringExtra("ListingPropertyBedsize")
-//        val apartImage = intent.getIntExtra("ListingPropertyImage",0)
-
-//        binding.detailsHouseName.text = apartName
-//        binding.detailsHseImage.setImageResource(apartImage)
 
         binding.imageButton.setOnClickListener {
             finish()
         }
+
         binding.addListingButton.setOnClickListener {
             addListingToFav()
         }
     }
 
     private fun addListingToFav() {
-         val database = FirebaseDatabase.getInstance().reference
-        val userId = auth.currentUser?.uid?:""
-        //create a favListing object
-        val favListing = FavListings(listingName.toString(),listingPrice.toString(),listingRating.toString(),listingLocation.toString(),listingHseType.toString(),listingBedsize.toString(),listingImage.toString())
+        val database = FirebaseDatabase.getInstance().reference
+        val userId = auth.currentUser?.uid ?: ""
 
-        //save data to fav listing firebase data class
-        database.child("user").child(userId).child("ListingProperties").push().setValue(favListing).addOnSuccessListener {
-            Toast.makeText(this,"Listings Added in Fav Succesfully",Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            Toast.makeText(this,"Listings NOT Added  ",Toast.LENGTH_SHORT).show()
-        }
+        // Create a FavListings object
+        val favListing = FavListings(
+            listingName ?: "ListingPropertyName",
+            listingPrice ?: "ListingPropertyPrice",
+            listingRating ?: "ListingPropertyRating",
+            listingLocation ?: "ListingPropertyLocation",
+            listingHseType ?: "ListingPropertyHseType",
+            listingBedsize ?: "ListingPropertyBedsize",
+            listingImage ?: "ListingPropertyImage"
+        )
 
+        // Save data to Firebase under user's favorite listings
+        database.child("user").child(userId).child("FavoriteItems").push()
+            .setValue(favListing)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Listing Added to Favorites Successfully", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to Add Listing to Favorites", Toast.LENGTH_SHORT).show()
+            }
     }
 }
