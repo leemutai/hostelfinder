@@ -1,3 +1,4 @@
+
 package com.example.hostel_locator.Fragment
 
 import FavoriteAdapter
@@ -36,7 +37,7 @@ class FavoriteFragment : Fragment() {
     private lateinit var favoriteHseType: MutableList<String>
     private lateinit var favoriteBed: MutableList<String>
     private lateinit var favoriteImage: MutableList<String>
-//    private lateinit var favoriteQuantity:MutableList<Int>
+    //    private lateinit var favoriteQuantity:MutableList<Int>
     private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var userId: String
 
