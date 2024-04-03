@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.hostel_locator.R
 import com.example.hostel_locator.databinding.FragmentProfileBinding
 import com.example.hostel_locator.model.UserModel
@@ -33,7 +34,34 @@ class ProfileFragment : Fragment() {
 
 
         saveUserData()
+        binding.saveInfoButton.setOnClickListener {
+            val name = binding.name.text.toString()
+            val address = binding.address.text.toString()
+            val email = binding.email.toString()
+            val phone = binding.phone.text.toString()
+
+            updateUserData(name,address,email,phone)
+        }
         return binding.root
+    }
+
+    private fun updateUserData(name: String, address: String, email: String, phone: String) {
+        val userId = auth.currentUser?.uid
+        if (userId !=null){
+            val userReference = database.getReference("user").child(userId)
+            val userData = hashMapOf(
+                "name" to name,
+                "address" to address,
+                "email" to email,
+                "phone" to phone
+            )
+            userReference.setValue(userData).addOnSuccessListener {
+                Toast.makeText(requireContext(), "Profile Updated Succesfully", Toast.LENGTH_SHORT).show()
+            }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "Profile Updated Failed", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     private fun saveUserData() {
