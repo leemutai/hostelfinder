@@ -60,6 +60,13 @@ class FavoriteAdapter(
 
     override fun getItemCount(): Int = favoriteItems.size
 
+    // get updated quantity
+    fun getUpdatedListingsQuanties(): MutableList<Int> {
+        val listingQuantity = mutableListOf<Int>()
+//        listingQuantity.addAll(favoriteQuantity)
+        return listingQuantity
+    }
+
     inner class FavoriteViewHolder(private val binding: FavoriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

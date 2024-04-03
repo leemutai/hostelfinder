@@ -18,9 +18,11 @@ import com.example.hostel_locator.model.ListingProperty
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.getValue
+import java.util.ArrayList
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
@@ -33,7 +35,8 @@ class FavoriteFragment : Fragment() {
     private lateinit var favoriteHseType: MutableList<String>
     private lateinit var favoriteBed: MutableList<String>
     private lateinit var favoriteImage: MutableList<String>
-    private lateinit var FavoriteAdapter: FavoriteAdapter
+//    private lateinit var favoriteQuantity:MutableList<Int>
+    private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,14 +70,87 @@ class FavoriteFragment : Fragment() {
 //        )
 
 
-
         binding.proceedButton.setOnClickListener {
-            val intent = Intent(requireContext(), BookingActivity::class.java)
-            startActivity(intent)
+            //get booking listings before proceeding to check out
+            getBookingListingsDetails()
+//            val intent = Intent(requireContext(), BookingActivity::class.java)
+//            startActivity(intent)
         }
 
 
         return binding.root
+    }
+
+    private fun getBookingListingsDetails() {
+
+        val bookingIdReference: DatabaseReference =
+            database.reference.child("user").child(userId).child("FavoriteItems")
+
+        val listingName = mutableListOf<String>()
+        val listingPrice = mutableListOf<String>()
+        val listingRating = mutableListOf<String>()
+        val listingLocation = mutableListOf<String>()
+        val listingHseType = mutableListOf<String>()
+        val listingBedsize = mutableListOf<String>()
+        val listingImage = mutableListOf<String>()
+        //get listing quanties
+//        val listingQuantities = favoriteAdapter.getUpdatedListingsQuanties()
+
+        bookingIdReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (listingSnapshot in snapshot.children) {
+                    // get the listingProperty to respective list
+                    val bookingListings = listingSnapshot.getValue(FavListings::class.java)
+                    //add listing items to list
+                    bookingListings?.listingName?.let { listingName.add(it) }
+                    bookingListings?.listingPrice?.let { listingPrice.add(it) }
+                    bookingListings?.listingRating?.let { listingRating.add(it) }
+                    bookingListings?.listingLocation?.let { listingLocation.add(it) }
+                    bookingListings?.listingHseType?.let { listingHseType.add(it) }
+                    bookingListings?.listingBedsize?.let { listingBedsize.add(it) }
+                    bookingListings?.listingImage?.let { listingImage.add(it) }
+                }
+                bookNow(
+                    listingName,
+                    listingPrice,
+                    listingRating,
+                    listingLocation,
+                    listingHseType,
+                    listingBedsize,
+                    listingImage
+                )
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(
+                    requireContext(),
+                    "Booking Failed Please Try Again.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+    }
+
+    private fun bookNow(
+        listingName: MutableList<String>,
+        listingPrice: MutableList<String>,
+        listingRating: MutableList<String>,
+        listingLocation: MutableList<String>,
+        listingHseType: MutableList<String>,
+        listingBedsize: MutableList<String>,
+        listingImage: MutableList<String>,
+    ) {
+        if (isAdded && context != null) {
+            val intent = Intent(requireContext(), BookingActivity::class.java)
+            intent.putExtra("ListingPropertyName", listingName as ArrayList<String>)
+            intent.putExtra("ListingPropertyPrice", listingPrice as ArrayList<String>)
+            intent.putExtra("ListingPropertyRating", listingRating as ArrayList<String>)
+            intent.putExtra("ListingPropertyLocation", listingLocation as ArrayList<String>)
+            intent.putExtra("ListingPropertyHseType", listingHseType as ArrayList<String>)
+            intent.putExtra("ListingPropertyBedsize", listingBedsize as ArrayList<String>)
+            intent.putExtra("ListingPropertyImage", listingImage as ArrayList<String>)
+            startActivity(intent)
+        }
     }
 
     private fun retriveFavoriteListings() {
@@ -112,9 +188,20 @@ class FavoriteFragment : Fragment() {
             }
 
             private fun setAdapter() {
-                FavoriteAdapter = FavoriteAdapter(requireContext(), favoriteItems, favoriteItemPrice, favoriteRating, favoriteLocation, favoriteHseType, favoriteBed, favoriteImage)
+                favoriteAdapter = FavoriteAdapter(
+                    requireContext(),
+                    favoriteItems,
+                    favoriteItemPrice,
+                    favoriteRating,
+                    favoriteLocation,
+                    favoriteHseType,
+                    favoriteBed,
+                    favoriteImage,
+//                    favoriteQuantity,
+
+                )
                 binding.favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-                binding.favoriteRecyclerView.adapter = FavoriteAdapter
+                binding.favoriteRecyclerView.adapter = favoriteAdapter
             }
 
 
