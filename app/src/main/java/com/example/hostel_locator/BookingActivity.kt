@@ -56,7 +56,9 @@ class BookingActivity : AppCompatActivity() {
         totalAmount = formatPriceWithK(calculateTotalAmount())
 //        binding.totalAmount.isEnabled = false
         binding.totalAmount.setText(totalAmount)
-
+        binding.backButton.setOnClickListener {
+            finish()
+        }
         binding.bookNow.setOnClickListener {
             val bottomSheetDialog = CongratsBottomSheet()
             bottomSheetDialog.show(supportFragmentManager,"Test")
