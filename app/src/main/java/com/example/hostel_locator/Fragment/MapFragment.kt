@@ -7,41 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hostel_locator.R
 import com.example.hostel_locator.adapter.ListingsAdapter
 import com.example.hostel_locator.databinding.FragmentMapBinding
+import com.example.hostel_locator.model.ListingProperty
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class MapFragment : Fragment() {
     private lateinit var binding: FragmentMapBinding
     private lateinit var adapter: ListingsAdapter
+    private lateinit var database: FirebaseDatabase
+    private val originalListingProperties = mutableListOf<ListingProperty>()
 
-    private val originalListingItemName = listOf("Dancy", "Qwety", "Kona", "Zipy")
-    private val originalListingItemPrice = listOf("Ksh10000", "Ksh4500", "Ksh7500", "Ksh8000")
-    private val originalListingRating = listOf("4.9", "3.5", "3.3", "2.0")
-    private val originalListingLocation = listOf("Kahawa", "Langata", "Westy", "Imara")
-    private val originalListingHseType = listOf("Apartment", "Studio", "2bd", "3bd")
-    private val originalListingBed = listOf("3.0", "1.0", "2.0", "3.0")
-    private val originalListingImage = listOf(
-        R.drawable.hostel,
-        R.drawable.hostel2,
-        R.drawable.hostel,
-        R.drawable.hostel2,
-
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
-    private val filteredListingItemName = mutableListOf<String>()
-    private val filteredListingItemPrice =mutableListOf<String>()
-    private val filteredListingRating = mutableListOf<String>()
-    private val filteredListingLocation = mutableListOf<String>()
-    private val filteredListingHseType= mutableListOf<String>()
-    private val filteredListingBed = mutableListOf<String>()
-    private val filteredListingImage = mutableListOf<Int>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -49,50 +35,51 @@ class MapFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMapBinding.inflate(inflater, container, false)
 
-//        adapter = ListingsAdapter(
-//            filteredListingItemName,
-//            filteredListingItemPrice,
-//            filteredListingRating,
-//            filteredListingLocation,
-//            filteredListingHseType,
-//            filteredListingBed,
-//            filteredListingImage,
-//            requireContext(),
-//        )
-        binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.listingsRecyclerView.adapter = adapter
-
-        //setup for serachview
+        //retrieve listing items from database
+        retrieveListingProperty()
+        //setup for traceview
         setUpSearchView()
-
-        //show all listingsItmes
-        showAllListings()
+        //show all listingsItems
         return binding.root
     }
 
-    private fun showAllListings() {
-        filteredListingItemName.clear()
-        filteredListingItemPrice.clear()
-        filteredListingRating.clear()
-        filteredListingLocation.clear()
-        filteredListingHseType.clear()
-        filteredListingBed.clear()
-        filteredListingImage.clear()
+    private fun retrieveListingProperty() {
+        //get database reference
+        database = FirebaseDatabase.getInstance()
+        //reference to the Listings node
+        val listingReference: DatabaseReference = database.reference.child("listing")
+        listingReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (listingSnapshot in snapshot.children) {
+                    val listingProperty = listingSnapshot.getValue(ListingProperty::class.java)
+                    listingProperty?.let {
+                        originalListingProperties.add(it)
+                    }
+                }
+                showAllListing()
+            }
 
-        filteredListingItemName.addAll(originalListingItemName)
-        filteredListingItemPrice.addAll(originalListingItemPrice)
-        filteredListingRating.addAll(originalListingRating)
-        filteredListingLocation.addAll(originalListingLocation)
-        filteredListingHseType.addAll(originalListingHseType)
-        filteredListingBed.addAll(originalListingBed)
-        filteredListingImage.addAll(originalListingImage)
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
+        })
 
-        adapter.notifyDataSetChanged()
+    }
+
+    private fun showAllListing() {
+        val filteredListingProperty = ArrayList(originalListingProperties)
+        setAdapter(filteredListingProperty)
+    }
+
+    private fun setAdapter(filteredListingProperty: List<ListingProperty>) {
+        adapter = ListingsAdapter(filteredListingProperty, requireContext())
+        binding.listingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.listingsRecyclerView.adapter = adapter
     }
 
     private fun setUpSearchView() {
-        binding.searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 filterListingItems(query)
                 return true
@@ -103,30 +90,12 @@ class MapFragment : Fragment() {
                 return true
             }
         })
-
     }
 
     private fun filterListingItems(query: String) {
-        filteredListingItemName.clear()
-        filteredListingItemPrice.clear()
-        filteredListingRating.clear()
-        filteredListingLocation.clear()
-        filteredListingHseType.clear()
-        filteredListingBed.clear()
-        filteredListingImage.clear()
-
-        originalListingItemName.forEachIndexed { index, apartName ->
-            if (apartName.contains(query.toString(),ignoreCase = true)){
-                filteredListingItemName.add(apartName)
-                filteredListingItemPrice.add(originalListingItemPrice[index])
-                filteredListingRating.add(originalListingRating[index])
-                filteredListingLocation.add(originalListingLocation[index])
-                filteredListingHseType.add(originalListingHseType[index])
-                filteredListingBed.add(originalListingBed[index])
-                filteredListingImage.add(originalListingImage[index])
-
-            }
+        val filteredListingProperty = originalListingProperties.filter {
+            it.listingName?.contains(query, ignoreCase = true) == true
         }
-        adapter.notifyDataSetChanged()
+        setAdapter(filteredListingProperty)
     }
 }

@@ -89,6 +89,7 @@ class BookingActivity : AppCompatActivity() {
         val listingPushKey = databaseReference.child("BookingDetails").push().key
         val bookingDetails = BookingDetails(
             userId,
+            name,
             listingPropertyName,
             listingPropertyPrice,
             listingPropertyRating,

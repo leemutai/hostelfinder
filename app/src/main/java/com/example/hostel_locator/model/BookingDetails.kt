@@ -37,6 +37,7 @@ class BookingDetails():Parcelable {
     constructor
                 (
         userId: String,
+        name:String,
         listingPropertyName: ArrayList<String>,
         listingPropertyPrice: ArrayList<String>,
         listingPropertyRating: ArrayList<String>,
@@ -50,7 +51,24 @@ class BookingDetails():Parcelable {
         listingPushKey: String?,
         b: Boolean,
         b1: Boolean,
-    ) : this()
+    ) : this(){
+        this.userUid = userId
+        this.userName = name
+        this.listingNames = listingPropertyName
+        this.listingPrices = listingPropertyPrice
+        this.listingRatings = listingPropertyRating
+        this.listingLocations = listingPropertyLocation
+        this.listingHseTypes = listingPropertyHseType
+        this.listingBedsizes = listingPropertyBedsize
+        this.listingImages = listingPropertyImage
+        this.address = address
+        this.phoneNumber = phone
+        this.currentTime = time
+        this.totalPrice = totalPrice
+        this.listingPushKey = listingPushKey
+        this.bookingAccepted = bookingAccepted
+        this.paymentReceived = paymentReceived
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userUid)
