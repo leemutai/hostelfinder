@@ -12,4 +12,8 @@
     <color name="startColor">#53E88B</color>
     <color name="endColor">#15BE77</color>
     <color name="iconColor">#FEAD1D</color>
+
+    <color name="background_tint_light">#FFFFFF</color>
+    <color name="background_tint_dark">#000000</color>
+    <color name="appThemeColor">#FFFFFF</color>
 </resources>

@@ -2,9 +2,10 @@ package com.example.hostel_locator.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 import java.util.ArrayList
 
-class BookingDetails():Parcelable {
+class BookingDetails():Serializable {
     var userUid:String? = null
     var userName:String? = null
     var listingNames:MutableList<String>? = null
@@ -70,7 +71,7 @@ class BookingDetails():Parcelable {
         this.paymentReceived = paymentReceived
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+      fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userUid)
         parcel.writeString(userName)
         parcel.writeString(address)
@@ -82,7 +83,7 @@ class BookingDetails():Parcelable {
         parcel.writeLong(currentTime)
     }
 
-    override fun describeContents(): Int {
+      fun describeContents(): Int {
         return 0
     }
 

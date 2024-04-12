@@ -57,21 +57,6 @@ class FavoriteFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         retriveFavoriteListings()
 
-
-//        val favoriteItems = listOf("Dancy", "Qwety", "Kona", "Zipy")
-//        val favoriteItemPrice = listOf("Ksh10000", "Ksh4500", "Ksh7500", "Ksh8000")
-//        val favoriteRating = listOf("4.9", "3.5", "3.3", "2.0")
-//        val favoriteLocation = listOf("Kahawa", "Langata", "Westy", "Imara")
-//        val favoriteHseType = listOf("Apartment", "Studio", "2bd", "3bd")
-//        val favoriteBed = listOf("3.0", "1.0", "2.0", "3.0")
-//        val favoriteImage = listOf(
-//            R.drawable.hostel,
-//            R.drawable.hostel2,
-//            R.drawable.hostel,
-//            R.drawable.hostel2
-//        )
-
-
         binding.proceedButton.setOnClickListener {
             //get booking listings before proceeding to check out
             getBookingListingsDetails()
