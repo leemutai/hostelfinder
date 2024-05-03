@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.hostel, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.hostel7, ScaleTypes.FIT))
         imageList.add(SlideModel(R.drawable.hostel2, ScaleTypes.FIT))
         imageList.add(SlideModel(R.drawable.hostel, ScaleTypes.FIT))
 
